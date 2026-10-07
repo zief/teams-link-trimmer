@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams Link Trimmer </title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f2f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        h2 { color: #444791; margin-top: 0; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; text-align: left; }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #d1d1d1;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        .output-box {
+            margin-top: 20px;
+            background: #f0f0f7;
+            padding: 15px;
+            border-left: 5px solid #444791;
+            word-break: break-all;
+            min-height: 40px;
+            font-size: 0.9rem;
+            color: #2b2b2b;
+            text-align: left;
+        }
+        .btn-group { text-align: left; }
+        button {
+            background-color: #444791;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        button:hover { background-color: #33366e; transform: translateY(-1px); }
+        .copy-btn { background-color: #0078d4; margin-top: 10px; width: 100%; }
+        .copy-btn:hover { background-color: #005a9e; }
+        
+        /* The "Team Ganteng" Footer */
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #888;
+            font-style: italic;
+        }
+        .footer b { color: #444791; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Teams Link Trimmer</h2>
+    <label for="inputUrl">Paste URL Teams Panjang:</label>
+    <textarea id="inputUrl" rows="4" placeholder="Paste link di sini..."></textarea>
+    
+    <div class="btn-group">
+        <button onclick="trimUrl()">Bersihkan Link</button>
+    </div>
+    
+    <div id="resultContainer" style="display:none;">
+        <label style="margin-top: 25px;">Hasil (Clean URL):</label>
+        <div id="output" class="output-box"></div>
+        <button class="copy-btn" onclick="copyToClipboard()">Salin ke Clipboard</button>
+    </div>
+
+    <div class="footer">
+        Created by <b>vibecoding</b> ~romi syuhada
+    </div>
+</div>
+
+<script>
+    function trimUrl() {
+        const rawUrl = document.getElementById('inputUrl').value.trim();
+        if (!rawUrl) return;
+
+        try {
+            const url = new URL(rawUrl);
+            const params = new URLSearchParams(url.search);
+            const newParams = new URLSearchParams();
+
+            // Sesuai request: tenantId, groupId, parentMessageId
+            const allowedParams = ['tenantId', 'groupId', 'parentMessageId'];
+
+            allowedParams.forEach(p => {
+                if (params.has(p)) {
+                    newParams.set(p, params.get(p));
+                }
+            });
+
+            // Reconstruct URL
+            const cleanUrl = url.origin + url.pathname + '?' + newParams.toString();
+            
+            document.getElementById('output').innerText = cleanUrl;
+            document.getElementById('resultContainer').style.display = 'block';
+        } catch (e) {
+            alert("Oops! URL sepertinya tidak valid. Pastikan formatnya benar.");
+        }
+    }
+
+    function copyToClipboard() {
+        const text = document.getElementById('output').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.querySelector('.copy-btn');
+            btn.innerText = "Tersalin!";
+            setTimeout(() => { btn.innerText = "Salin ke Clipboard"; }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
