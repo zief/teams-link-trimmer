@@ -84,11 +84,6 @@ Jira parses raw URLs automatically into markdown or HTML links. When a Teams URL
 
 Yes. The script runs entirely in your browser (`client-side`). No links, tenant IDs, or message parameters leave your browser or get sent to any server.
 
-## 🏷️ Recommended GitHub Topics
-
-Add these topics in your GitHub repository settings to boost discovery:
-`jira` • `jira-fix` • `microsoft-teams` • `teams-link-cleaner` • `url-trimmer` • `url-sanitizer` • `privacy-tool`
-
 ## 👤 Credits
 
-Created with ❤️ by **vibecoding \~niam**.
+Created with ❤️ by **vibecoding \~niam aka romi syuhada**.
