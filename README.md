@@ -56,7 +56,7 @@ https://teams.microsoft.com/l/message/19%3Axxx@thread.v2/12345?tenantId=abc-123&
 
 ### Method 1: Live Web App (GitHub Pages)
 
-1. Open the hosted web app: `https://zief.github.io/teams-link-trimmer/` *(Replace with your actual GitHub Pages URL)*.
+1. Open the hosted web app: `https://zief.github.io/teams-link-trimmer/`.
 
 2. Paste your long Microsoft Teams link into the input box.
 
